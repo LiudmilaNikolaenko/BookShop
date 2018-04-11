@@ -1,0 +1,28 @@
+<div class="container">
+  <h3 class="text-center">Showcase</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Title</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books" (click)="bookInfo(book.id)">
+        <td>
+          {{book.author}}
+        </td>
+        <td>
+          {{book.title}}
+        </td>
+        <td>
+          {{book.price | number:'1.2-2'}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+</div>

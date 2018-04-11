@@ -1,0 +1,17 @@
+<div class="container">
+  <h3 class="text-center">Book Info</h3>
+
+  <p><strong>Author: </strong>{{book.author}}</p>
+  <p><strong>Title: </strong>{{book.title}}</p>
+  <p><strong>ISBN: </strong>{{book.isbn}}</p>
+  <p><strong>Pages: </strong>{{book.pages}}</p>
+  <p><strong>Format: </strong>{{format.name}}</p>
+  <p><strong>Description: </strong>{{book.description}}</p>
+  <p><strong>Price: </strong>{{book.price | number:'1.2-2'}}</p>
+  <h5 class="text-center">Publisher</h5>
+  <p><strong>Company: </strong>{{publisher.name}}</p>
+  <p><strong>City: </strong>{{city.name}}</p>
+  <p><strong>Country: </strong>{{country.name}}</p>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-4">{{errorMessage}}</div>
+</div>

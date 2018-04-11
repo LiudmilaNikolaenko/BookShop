@@ -1,0 +1,103 @@
+<div class="form-wrapper" *ngIf="bookForm">
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+
+    <h3 class="text-center mb-4">Add New Book</h3>
+
+    <div class="form-group">
+      <label for="author">Author: </label>
+      <input class="form-control" id="author" type="text" formControlName="author">
+      <div class="alert alert-danger" 
+          *ngIf="checkError('author' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title: </label>
+      <input class="form-control" id="title" type="text" formControlName="title">
+      <div class="alert alert-danger" 
+          *ngIf="checkError('title' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="isbn">ISBN: </label>
+      <input class="form-control" id="isbn" type="text" formControlName="isbn">
+      <div class="alert alert-danger" 
+          *ngIf="checkError('isbn' ,'required')">Required!</div>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('isbn' ,'pattern')">The value must be an ten-digits number!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="pages">Number of Pages: </label>
+      <input class="form-control" id="pages" type=number formControlName="pages">
+      <div class="alert alert-danger" 
+          *ngIf="checkError('pages' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="format">Format: </label>
+      <select class="form-control" id="format" formControlName="formatId">
+        <option *ngFor="let format of formats" value={{format.id}}>{{format.name}}</option>
+      </select>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('formatId' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description: </label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('description' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price: </label>
+      <input class="form-control" id="price" type="text" formControlName="price">
+      <div class="alert alert-danger" 
+          *ngIf="checkError('price' ,'required')">Required!</div>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('price' ,'pattern')">Price format must be 0.00!</div>
+    </div>
+
+    <h3 class="mt-4 mb-4">Publisher Info</h3>
+
+    <div class="form-group">
+      <label for="country">Country: </label>
+      <select class="form-control" id="country" formControlName="countryId">
+        <option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</option>
+      </select>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('countryId' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group" *ngIf="bookForm.get('countryId').value">
+      <label for="city">City: </label>
+      <select class="form-control" id="city" formControlName="cityId">
+        <option 
+          *ngFor="let city of filteredCities" 
+          value={{city.id}}
+        >{{city.name}}</option>
+      </select>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('cityId' ,'required')">Required!</div>
+    </div>
+
+    <div class="form-group" *ngIf="bookForm.get('cityId').value">
+      <label for="company">Company: </label>
+      <select class="form-control" id="company" formControlName="companyId">
+        <option 
+          *ngFor="let publisher of filteredPublishers" 
+          value={{publisher.id}}
+        >{{publisher.name}}</option>
+      </select>
+      <div class="alert alert-danger" 
+          *ngIf="checkError('companyId' ,'required')">Required!</div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger mt-4 mb-4">{{errorMessage}}</div>
+
+    <button class="btn btn-primary" (click)="goBack()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">Submit</button>
+
+  </form>
+</div>
